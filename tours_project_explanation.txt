@@ -1,0 +1,59 @@
+
+//web page
+our project is going to be a tours project, where we are going to fetch a list
+of tours, for every tour there is an image, name of tour, price and an option 
+to read more, which expands the text through "conditional rendering". there
+is also an option of "not interested" which means if user is not interested
+in the tour, just click a button and that tour component disappears. if there
+are no tours left, then we have text of "no tours left" and a "refresh" button
+also since we are fetching the data, there is a short "loading" text that 
+appears every time data is taking it's time to be fetched
+
+//code explanation
+As far as this particular project, we have index.js, where we import app.js 
+of course, we have app.js where we import "Loading" component as well as
+"Tours" component, which as you can probably guess is responsible for 
+rendering all the tours(Rendering meaning-->displaying on web page)
+then we have a variable called 'url' which is set to the api endpoint used 
+for fetching all the tours. const url stores a link to the dataset from where
+the data will be fetched. And also we have a single Tour Component
+the way this works is first we fetch our data, then we pass it into the tours
+then we iterate over the tours data, and then for every tour, we display a 
+single tour component
+//
+there are two state variables--> loading(bool) and tours(empty array)
+if loading is true, we return the loading component which displays loading
+on the screen, if it is false, we return a Tours component
+
+//fetching data
+to fetch the data from api, we use async-await at "fetchTours" and then 
+.json() into tours which was an empty array, now we pass this value into
+tours.js
+
+//displaying data
+here we set up how we iterate over our tours with .map() where we return 
+a tour component. then in the tour.js, we set up an image with it's source 
+being image fetched from url, right under it we display the name and so on
+until the end where we set up our not interested button.
+
+//read more functionality on paragraph
+we set up a state value as readMore, and then at paragraph, we set up some
+conditional rendering. then we set up a button and set onclick on it so that
+every time it is pressed, it reverses the value of readmore. so essentially, 
+if it readmore is false, on clicking it will become true.
+
+//'not interested' button funtionality
+we create a removeTour() function in which takes in a parameter of id, then
+with the .filter() method, we check if that id matches then we remove the 
+tour, all else tour id is set in a newTours array, then we set our tour 
+hook to newTours array which only returns tours that are in newTours array
+then with prop drilling , this function is accessed in the not interested
+button's onclick() event in our tour component
+
+//refresh button
+in app.js we check what tours length is, which returns how many tours are
+left in the state value, if there are none, we return a jsx with a button
+with onclick with fetchTours as the function
+
+
+
